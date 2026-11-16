@@ -14,7 +14,24 @@ void printReadings(const Node* head){
     for (const Node* current = head; current != nullptr; current = current->next) {
         std::cout << current->value << " -> ";
     }
-    //std::cout << "nullptr\n";
+    std::cout << "nullptr\n";
+}
+
+//this doesn't work
+void addReadingBroken(Node* head, int value){
+    Node* node = new Node;
+    node->value = value;
+    node->next = head;
+    head = node; //changes only this function's copy of head
+
+}
+
+//this works
+Node* addReading(Node* head, int value){
+    Node* node = new Node;
+    node->value = value;
+    node->next = head;
+    return node;        // the new node is the new head
 }
 
 int totalReadings(const Node* head){
@@ -41,12 +58,23 @@ int main(){
 
     Node* head = first;
 
-    printReadings(head);
-    std::cout << totalReadings(head);
+
+    Node* node = new Node; //cheapest place to add a node is the front (no need to move anything)
+    node->value = 7;
+    node->next = head; //new node points at the old first node
+    head = node; //head points at the new node
+
+    //The caller then stores the result in its own head pointer:
+    Node* head2 = nullptr;
+    head2 = addReading(head2, 2);
+    head2 = addReading(head2, 9);
+    head2 = addReading(head2, 5);
+    printReadings(head2);
 
     delete first;
     delete second;
     delete third;
+    delete node;
 
     return 0;
 }
