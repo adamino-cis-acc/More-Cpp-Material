@@ -9,7 +9,22 @@ struct Node {
     Node* next;
 };
 
+//to visit every node we keep a second pointer
+void printReadings(const Node* head){
+    for (const Node* current = head; current != nullptr; current = current->next) {
+        std::cout << current->value << " -> ";
+    }
+    //std::cout << "nullptr\n";
+}
 
+int totalReadings(const Node* head){
+    int total = 0;
+    for(const Node* current = head; current != nullptr; current = current->next){
+        ++total;
+    }
+    std::cout << total << std::endl;
+    return total;
+}
 
 int main(){
     Node* third = new Node;
@@ -26,9 +41,8 @@ int main(){
 
     Node* head = first;
 
-    std::cout << head ->value << '\n';
-    std::cout << head->next->value << '\n';
-    std::cout << head->next->next->value << '\n';
+    printReadings(head);
+    std::cout << totalReadings(head);
 
     delete first;
     delete second;
