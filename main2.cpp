@@ -70,6 +70,17 @@ int main(){
     head2 = addReading(head2, 9);
     head2 = addReading(head2, 5);
     printReadings(head2);
+    std::cout<< '\n';
+
+    if(!(head2 == nullptr)){
+        Node* removed = new Node; 
+        removed = head2;          //remember first node
+        head2 = head2->next;      //head moves to the second node
+        delete removed;           //release the old first node
+        removed = nullptr;
+
+    }
+    printReadings(head2);
 
     delete first;
     delete second;
